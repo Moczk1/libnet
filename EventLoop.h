@@ -16,7 +16,6 @@ namespace m_libnet
     class Channel;
     class EPollPoller;
 
-    thread_local EventLoop *t_loopInThisThread = nullptr;
 
     class EventLoop
     {

@@ -261,6 +261,23 @@ namespace m_libnet
         }
     }
 
+    void TcpConnection::send(const std::string &buf)
+{
+    if (m_state == Connected)
+    {
+        if (m_loop->isInLoopThread()) // 这种是对于单个reactor的情况 用户调用conn->send时 loop_即为当前线程
+        {
+            sendInLoop(buf.c_str(), buf.size());
+        }
+        else
+        {
+            m_loop->runInLoop(
+                std::bind(&TcpConnection::sendInLoop, this, buf.c_str(), buf.size()));
+        }
+    }
+}
+
+
     // 在事件循环中执行sendfile
     void TcpConnection::sendFileInLoop(int fileDescriptor, off_t offset, size_t count) {
         ssize_t bytesSent = 0; // 发送了多少字节数
