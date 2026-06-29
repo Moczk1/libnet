@@ -1,6 +1,5 @@
 #pragma once
-
-
+#include <unistd.h>
 #include "Logger.h"
 #include "InetAddress.h"
 
@@ -13,7 +12,7 @@ namespace m_libnet
 
     public:
         explicit Socket(int fd) : m_fd(fd) {}
-        ~Socket() { close(m_fd); }
+        ~Socket() { ::close(m_fd); }
         const int fd() const { return m_fd; }
 
         void bindAddress(const InetAddress &localaddr);

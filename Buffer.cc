@@ -75,7 +75,7 @@ namespace m_libnet
         }
         else
         {
-            m_writeStartByteIndex == m_buffer.size();
+            m_writeStartByteIndex = m_buffer.size();
             append(extraBuf, n - writable);
         }
         return n;

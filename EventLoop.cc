@@ -13,7 +13,7 @@ namespace m_libnet
         }
         m_wakeupChannel = std::make_unique<Channel>(this, m_wakeupFd);
 
-        m_poller = std::make_unique<Poller>(this);
+        m_poller = std::make_unique<EPollPoller>(this);
         LOG_DEBUG("EventLoop created %p in thread %d\n", this, m_pid);
 
         if (t_loopInThisThread)
@@ -59,7 +59,7 @@ namespace m_libnet
     void EventLoop::quit()
     {
         m_hasQuit = true;
-        if (!isInLoopThread)
+        if (!isInLoopThread())
         {
             wakeup();
         }

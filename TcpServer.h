@@ -11,9 +11,12 @@
 #include "EventLoopThreadPool.h"
 #include "TcpConnection.h"
 #include "Buffer.h"
+#include "EventLoop.h"
 
 namespace m_libnet
 {
+
+    class EventLoop;
 
     // 对外的服务器编程使用的类
     class TcpServer
