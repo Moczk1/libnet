@@ -20,6 +20,12 @@ namespace m_libnet
     Accepter::Accepter(EventLoop *loop, const InetAddress &inetAddress, bool reusePort)
         : m_loop(loop), m_acceptSocket(createFd()), m_acceptChannel(loop, m_acceptSocket.fd())
     {
+        m_acceptSocket.setReuseAddr(true);
+        m_acceptSocket.setReusePort(true);
+        m_acceptSocket.bindAddress(inetAddress);
+        m_acceptChannel.setReadCallBacK(
+            std::bind(&Accepter::handleRead, this)
+        );
     }
 
     Accepter::~Accepter()
