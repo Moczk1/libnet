@@ -8,7 +8,7 @@ namespace m_libnet
         m_buffer.resize(size + PRE_SAVE_PEND);
     }
 
-    void Buffer::retieve(size_t len)
+    void Buffer::retrieve(size_t len)
     {
         if (len < readableByteSize())
         {

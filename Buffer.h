@@ -10,6 +10,7 @@ namespace m_libnet
     class Buffer
     {
         static const int PRE_SAVE_PEND = 8;
+        static const size_t kInitialSize = 1024;
 
     private:
         /* data */
@@ -18,7 +19,7 @@ namespace m_libnet
         int m_writeStartByteIndex = PRE_SAVE_PEND;
 
     public:
-        explicit Buffer(size_t size);
+        explicit Buffer(size_t size = kInitialSize);
 
         size_t readableByteSize() const { return m_writeStartByteIndex - m_readStartByteIndex; }
         size_t writableByteSize() const { return m_buffer.size() - m_writeStartByteIndex; }
@@ -29,7 +30,7 @@ namespace m_libnet
         char *begin() { return &*m_buffer.begin(); }
         const char *begin() const { return &*m_buffer.begin(); }
 
-        void retieve(size_t len);
+        void retrieve(size_t len);
         std::string retrieveAsString(size_t len);
         std::string retrieveAllAsString();
 
