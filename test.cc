@@ -1,14 +1,17 @@
-#pragma once
 #include <string>
 #include <functional>
-
 #include "TcpServer.h"
 #include "Logger.h"
 
-using namespace m_libnet;
-
+using m_libnet::Accepter;
+using m_libnet::Buffer;
+using m_libnet::EventLoop;
+using m_libnet::InetAddress;
+using m_libnet::TcpConnection;
+using m_libnet::TcpServer;
 class EchoServer
 {
+
 public:
     EchoServer(EventLoop *loop, const InetAddress &addr, const std::string &name)
         : server_(loop, addr, name), loop_(loop)

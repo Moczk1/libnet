@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <memory>
+#include <sys/types.h>
 #include "Logger.h"
 #include "Poller.h"
 
@@ -55,7 +56,7 @@ namespace m_libnet
         void removeChannel(Channel *);
         void updateChannel(Channel *);
 
-        bool isInLoopThread() const { return m_pid == static_cast<pid_t>(::syscall(SYS_gettid)); }
+        bool isInLoopThread() const { return m_pid == static_cast<pid_t>(::gettid()); }
         std::chrono::system_clock::time_point pollReturnTime() const { return m_pollReturnTime; }
 
         void handleRead();        // 给eventfd返回的文件描述符wakeupFd_绑定的事件回调 当wakeup()时 即有事件发生时 调用handleRead()读wakeupFd_的8字节 同时唤醒阻塞的epoll_wait

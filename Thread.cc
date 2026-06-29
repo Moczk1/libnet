@@ -31,7 +31,7 @@ namespace m_libnet
             new std::thread(
                 [&]()
                 {
-                    tid_ = ::syscall(SYS_gettid); // 获取线程的tid值
+                    tid_ = ::gettid(); // 获取线程的tid值
                     sem_post(&sem);
                     func_(); // 开启一个新线程 专门执行该线程函数
                 }));

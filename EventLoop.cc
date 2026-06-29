@@ -6,7 +6,7 @@ namespace m_libnet
     thread_local EventLoop *t_loopInThisThread = nullptr;
 
     EventLoop::EventLoop()
-        : m_isLooping(false), m_hasQuit(false), m_callingPendingFunctors(false), m_pid(::syscall(SYS_gettid))
+        : m_isLooping(false), m_hasQuit(false), m_callingPendingFunctors(false), m_pid(::gettid())
     {
         m_wakeupFd = ::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
         if (m_wakeupFd < 0)

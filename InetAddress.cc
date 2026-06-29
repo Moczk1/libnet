@@ -20,7 +20,7 @@ namespace m_libnet
         ::inet_ntop(AF_INET, &m_addr.sin_addr, buf, sizeof buf);
         size_t end = strlen(buf);
         uint64_t port = ::ntohs(m_addr.sin_port);
-        sprintf(buf + end, ":%u", port);
+        sprintf(buf + end, ":%lu", port);
         return buf;
     }
     uint64_t InetAddress::toPort() const
